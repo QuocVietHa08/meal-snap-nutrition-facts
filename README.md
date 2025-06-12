@@ -1,73 +1,112 @@
-# Welcome to your Lovable project
+# MealSnap: AI-Powered Nutrition Facts Analyzer
 
-## Project info
+![MealSnap App Screenshot 1](./src/assests/images/1.png)
 
-**URL**: https://lovable.dev/projects/e17c7f03-2ff1-4476-beb1-19943f62cba6
+MealSnap is an AI-powered web application that analyzes food images to provide detailed nutritional information. Simply upload a photo of your meal, and the app will identify the food and generate a comprehensive nutrition label in FDA format.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Image Analysis**: Upload photos of food dishes for instant nutritional analysis
+- **AI-Powered Recognition**: Utilizes OpenAI's GPT-4o model for accurate food identification
+- **Detailed Nutrition Facts**: Displays comprehensive nutritional information in FDA-style format
+- **User-Friendly Interface**: Modern, responsive design with intuitive controls
+- **Real-Time Processing**: Quick analysis with visual feedback during processing
 
-**Use Lovable**
+![MealSnap App Screenshot 2](./src/assests/images/2.png)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e17c7f03-2ff1-4476-beb1-19943f62cba6) and start prompting.
+## Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+MealSnap is built with modern web technologies:
 
-**Use your preferred IDE**
+### Frontend
+- **React 18**: For building the user interface with functional components and hooks
+- **TypeScript**: For type-safe code and improved developer experience
+- **Vite**: For fast development and optimized production builds
+- **Tailwind CSS**: For utility-first styling and responsive design
+- **shadcn/ui**: For beautiful, accessible UI components
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### AI & Data Processing
+- **OpenAI API**: Utilizing GPT-4o for image analysis and nutritional data extraction
+- **Base64 Encoding**: For efficient image data transfer to the AI model
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### State Management
+- **React Hooks**: useState and useEffect for local state management
 
-Follow these steps:
+### Development Tools
+- **ESLint**: For code quality and consistency
+- **TypeScript**: For static type checking
+- **npm/Yarn**: For package management
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Installation & Setup
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or Yarn
+- OpenAI API key
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Installation Steps
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/yourusername/meal-snap-nutrition-facts.git
+   cd meal-snap-nutrition-facts
+   ```
+
+2. **Install dependencies**
+   ```sh
+   npm install
+   # or
+   yarn
+   ```
+
+3. **Set up environment variables**
+   
+   Create a `.env` file in the root directory with your OpenAI API key:
+   ```
+   VITE_OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+4. **Start the development server**
+   ```sh
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. **Open your browser**
+   
+   Navigate to `http://localhost:5173` to see the application running.
+
+## Usage
+
+1. Click the upload button or drag and drop a food image
+2. Wait for the AI to analyze the image (typically a few seconds)
+3. View the detailed nutrition facts label for your food
+4. Use the information to make informed dietary choices
+
+## Project Structure
+
+```
+/src
+  /assests        - Images and static assets
+  /components     - Reusable UI components
+  /config         - Configuration files for OpenAI and image processing
+  /hooks          - Custom React hooks
+  /lib            - Utility functions and shared code
+  /pages          - Main application pages
+  App.tsx         - Main application component
+  main.tsx        - Application entry point
 ```
 
-**Edit a file directly in GitHub**
+## Contributing
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-**Use GitHub Codespaces**
+## License
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## What technologies are used for this project?
+## Acknowledgements
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/e17c7f03-2ff1-4476-beb1-19943f62cba6) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- OpenAI for providing the powerful vision models
+- The React and TypeScript communities for excellent documentation and tools

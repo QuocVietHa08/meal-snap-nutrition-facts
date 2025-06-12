@@ -4,6 +4,8 @@ import Hero from "@/components/Hero";
 import ImageUpload from "@/components/ImageUpload";
 import NutritionLabel from "@/components/NutritionLabel";
 import NutritionSummary from "@/components/NutritionSummary";
+import NutritionLabelSkeleton from "@/components/NutritionLabelSkeleton";
+import NutritionSummarySkeleton from "@/components/NutritionSummarySkeleton";
 import { analyzeFoodImage, fileToBase64, NutritionData } from "@/config";
 
 // Mock nutrition data - in a real app this would come from AI analysis
@@ -73,7 +75,24 @@ const Index = () => {
           />
         </section>
 
-        {showResults && nutritionData && (
+        {/* Show skeleton loading when analyzing */}
+        {isAnalyzing && uploadedImage && (
+          <div className="space-y-8 animate-pulse">
+            <section>
+              <h2 className="text-2xl font-bold font-poppins text-center mb-6">
+                📊 Analyzing Your Food...
+              </h2>
+              <NutritionLabelSkeleton />
+            </section>
+
+            <section>
+              <NutritionSummarySkeleton />
+            </section>
+          </div>
+        )}
+
+        {/* Show results when analysis is complete */}
+        {showResults && nutritionData && !isAnalyzing && (
           <div className="space-y-8 animate-fade-in">
             <section>
               <h2 className="text-2xl font-bold font-poppins text-center mb-6">
