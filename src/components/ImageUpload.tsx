@@ -120,7 +120,7 @@ const ImageUpload = ({ onImageUpload, isLoading = false }: ImageUploadProps) => 
                     disabled={isLoading}
                   />
                 </Button>
-                <Button 
+                {/* <Button 
                   variant="outline" 
                   className="relative overflow-hidden"
                   disabled={isLoading}
@@ -135,7 +135,7 @@ const ImageUpload = ({ onImageUpload, isLoading = false }: ImageUploadProps) => 
                     className="absolute inset-0 opacity-0 cursor-pointer"
                     disabled={isLoading}
                   />
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>

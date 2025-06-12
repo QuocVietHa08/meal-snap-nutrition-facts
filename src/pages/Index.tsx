@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ImageUpload from "@/components/ImageUpload";
 import NutritionLabel from "@/components/NutritionLabel";
 import NutritionSummary from "@/components/NutritionSummary";
+import { analyzeFoodImage, fileToBase64, NutritionData } from "@/config";
 
 // Mock nutrition data - in a real app this would come from AI analysis
 const mockNutritionData = {
@@ -31,52 +31,74 @@ const Index = () => {
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [nutritionData, setNutritionData] = useState<NutritionData | null>(
+    null
+  );
+  const [error, setError] = useState<string | null>(null);
 
-  const handleImageUpload = (file: File) => {
+  const handleImageUpload = async (file: File) => {
     setUploadedImage(file);
     setIsAnalyzing(true);
-    
-    // Simulate API call delay
-    setTimeout(() => {
-      setIsAnalyzing(false);
+    setError(null);
+
+    try {
+      // Convert the image file to base64
+      const base64Image = await fileToBase64(file);
+
+      // Analyze the image using OpenAI
+      const result = await analyzeFoodImage(base64Image);
+
+      // Update state with the analysis results
+      setNutritionData(result);
       setShowResults(true);
-    }, 2500);
+    } catch (err) {
+      console.error("Error analyzing food image:", err);
+      setError("Failed to analyze the image. Please try again.");
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="container mx-auto px-4 pb-16">
         <Hero />
-        
+
         <section className="mb-12">
-          <ImageUpload 
-            onImageUpload={handleImageUpload} 
+          <ImageUpload
+            onImageUpload={handleImageUpload}
             isLoading={isAnalyzing}
           />
         </section>
 
-        {showResults && (
+        {showResults && nutritionData && (
           <div className="space-y-8 animate-fade-in">
             <section>
               <h2 className="text-2xl font-bold font-poppins text-center mb-6">
-                📊 Nutrition Analysis
+                📊 Nutrition Analysis: {nutritionData.foodName}
               </h2>
-              <NutritionLabel data={mockNutritionData} />
+              <NutritionLabel data={nutritionData} />
             </section>
-            
+
             <section>
               <NutritionSummary />
             </section>
           </div>
         )}
-        
+
         {!showResults && !uploadedImage && (
           <div className="text-center py-12">
             <p className="text-muted-foreground">
               📸 Upload a photo of your meal to get started!
             </p>
+          </div>
+        )}
+
+        {error && (
+          <div className="text-center py-4">
+            <p className="text-destructive">{error}</p>
           </div>
         )}
       </main>
